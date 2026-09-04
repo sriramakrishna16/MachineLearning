@@ -1,0 +1,120 @@
+Linear Regression:
+    Linear regression is a supervised machine learning algorithm used to model and 
+    predict a continuous numeric output variable based on one or more input features.
+    It assumes that a straight-line relationship exists between your inputs and your output.
+
+Linear regression is the process of predicting a numerical value with the help of best fit line.
+
+Depending on how many features we use , the formula scales from a two dimensionlal line
+    to multi dimentional hyperplane.
+
+1.simple linear regression:
+    y = b0 + b1x1 or y = mx + c , m = slope and c = intercept
+2.multiple linear regression:
+    y = b0 + b1x1 + b2x2 + b3x3 + b4x4 + ..... +bnxn
+
+y - predicted output
+b0 - intercept, represents the baseline value when all features equals zero
+b1,b2,b3 - the coefficients or weights assigned to each feature. They act as multiplier
+            determining feature impact
+x1,x2,x3 - actual feature values
+
+    for example : assuming b1 as area in house price prediction 
+            x is actual feature value and b1 is coefficient 
+            so, if b increases (area), feature value also increases
+
+Evaluation methods:
+
+we used to calculate the error to find the best fit line
+    while calculating , change of error cancel each other 
+ex
+area price predicted error
+5   20  15  5  
+6   25  21  4  
+7   30  25  5   
+8   35  40  -5
+now while calculating the total error , 3 and 4 row values get calcel each other
+resulting in wrong error calculation
+
+so we apply squares to the error i.e 5sq + 4sq + 5sq + (-5)sq , so negative values turn into positive
+this is known as Sum of squared errors (SSE)
+
+now if we find the average error -> that is Summation(actual - pred)sq / n then it is MSE(mean squared error)
+
+so, when we observe that squaring changes the scale very large ex: 25L error , then
+squaring produce very large scale value , so we apply sqrt to it 
+then it is RMSE (Root mean squared error) summation(sqrt(actual-pred)sq)/n
+
+MSE - punishes large errors heavily ,ex : 2 and 10 
+     Mean absolute error - > 2 + 10/2 = 6
+     MEan squared error -> 4 + 100/2 = 52 (10 error punished heavily)
+
+and now we use RMSE to convert back into orginal unit of target value.
+
+so based on error , we used to find the best fit line...! some line gives high error , some line give least
+error 
+
+Manual example : basically ml linear model internally does Theta = (XtX)^-1 Xt y formula 
+to find the intercept(base value) and coefficient
+
+then we do manual example...
+
+area actual prediction
+1   3   2
+2	5	3
+3	7	4
+4	9	5
+
+this is linear , so i am using linear formula that is y = mx + c, slope is the reasong for how value
+cahnges , we can also called it as coefficients
+
+now i am taking slope 1 and intercept as 1 , then 
+1(1)+1 = 2, 1(2)+1 = 3 ....
+then we know this slope values sucks , not best fit line
+
+so we change it , now slope = 2
+2(1)+1 = 3, 2(2)+1= 5..... boom this is best fit line
+
+for intercept -> if actual 2 3 5 7 9 then predicted is 1 2 4 6 8 
+we can find that the slope is good but its siiting one unit slow , so we increase the intercept to 1
+
+so once the model finds the optimal slope , it uses formuala to find slope c = mx - y
+
+Matrix level : B = (XtX)-1Xt y  t for transpose
+
+for example it takes intercept as 1 in 1st col and feacture in another columns
+House Area Bedrooms Price
+A	1	1	6
+B	2	1	8
+C	3	2	11
+
+formula is y = b + w1x1 + w2x2 or y = c + m1x1 + m2x2 whatever we call it.
+
+we have to find the best coefficient and intercept to form best line
+
+so, we use matrix formula
+    
+X=
+​1 1 1
+​1 2 3   first column intercept we take as 1 , and w1 and w2 other columns
+​1 1 2
+
+y = 6
+    8
+    11
+    
+we have to find parameters theta 0
+0 = b
+    w1
+    w2
+    
+now formula is θ=(XTX)−1XTy 
+
+-----------this is all about linear regression---------------
+	​
+​
+​
+
+
+
+
