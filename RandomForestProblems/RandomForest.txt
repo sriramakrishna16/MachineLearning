@@ -1,0 +1,29 @@
+Random Forest Definition:
+    Random Forest is an ensemble machine learning algorithm that combines many Decision Trees
+     and uses their combined predictions to make a more accurate and robust prediction.
+
+in decision trees , there is overfitting issue because one tree might learn the training data
+    to specially.
+
+Decision Trees are highly prone to overfitting because they can keep splitting 
+        the data until they almost memorize the training dataset.
+
+There is a high chances of overfitting when data is complex , bcz trees getting splitted and learns
+    training data to specially.
+
+Random forest solves this by creating many different trees instead of relying on just one.
+
+There are two ensembling techniques in random forest:(ensemble : combining models together)
+    they are : 1) Bagging
+               2) Boosting
+
+Bagging: B stands for bootstrap and agging stands for aggrigation
+ Bootstrap mean sampling with replacement
+ Step1: Sampling with replacement
+    based on dataset we take samples , ex : n_samples = 5
+    then it takes 5 random rows for each sample. and without replacement mean
+    a row may occur twice or more and a row never occurs so each sampling has differnt entropy values.
+step 2 : Decision trees are build based on each sample.
+step 3 : test data passes to each tree and computes the majority one. This is known as aggregation.
+
+
