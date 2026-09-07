@@ -1,0 +1,47 @@
+Decision Trees — Definition
+A Decision Tree is a supervised machine-learning algorithm that makes predictions 
+by repeatedly splitting the data based on feature values.
+
+It makes the predictions by repeatedly splitting the dataset based on feature values
+forming a tree like structure.
+
+the important think is to find and use the perfect root node to have a clear Tree Structure.
+
+RootNode slection criteria :
+1.Entropy
+2.Gini Index
+
+we use entropy or gini index to calculate or measure the randomness of the features (columns)
+randomness - random feature splitting...(no clear splitts)
+
+we use entropy or gini index to have a clear splits
+
+Entropy: 
+Entropy is a measure of the uncertainty or impurity present in a dataset or node
+e(x) = summation(-p log p)
+Steps: 1) find entropy for target
+        2) find individual feature entropy with respect to target
+        3) calculate weighted entropy - this is actual entropy which tells the uncertainity or randomness.
+        4) then find information gain -> parent entropy - weighted entropy.
+
+Gini Index:
+Gini Impurity measures the probability that a randomly chosen sample would be incorrectly classified if it
+ were labeled according to the class distribution of the node.
+
+Gini index = 1 - summation(p^2)
+steps : 1) calculate target column gini index.
+        2) find individual feature entropy with respect to target
+        ex : if selected outlook in play tennis dataset ,
+        thnen in outlook there are sunny, overcast, rain
+        sunny wrt target -> 1 yes , 3 no 
+        so for gini = 1-(1/4)^2 -(3/4)^2 = 0.375
+        same for overcast and rain
+        3) find the weighted gini (add each gini to find overall gini)
+        lesser the gini , less randomness and uncertainity.
+
+we can choose either entropy or gini to choose the best splitting features ,continuos same
+process until it reaches the end node or child node.
+
+
+
+
