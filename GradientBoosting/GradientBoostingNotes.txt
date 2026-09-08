@@ -1,0 +1,37 @@
+Gradient-Boosting definition:
+    Gradient Boosting is a machine learning technique that builds multiple weak decision trees sequentially, 
+    where each new tree tries to correct the errors made by the previous trees.
+
+bias - the model not performing well, not learned well (it doesnt learn the real pattern)
+  def : How much the model is consistently wrong because it is too simple
+
+Variance - it learns the training data too closely including noise.
+    def : How much the model's prediction changes when the training data changes.
+
+example:
+
+exp degree salary base(y)   r1  r2
+2   BE      50k    75k     -25  -23
+3   MASTERS 70k    75k      -5  -3
+5   MASTERS 80k    75k      5   3
+6   PHD     100k   75k      25  20
+
+step1 : compute base model which will produces one output(avg of all target values)
+step2 : compute residuals (errors) also called pseudo residuals
+step3 : construct decision tree with same inputs (exp and degree) and target as residual output(r1)
+
+if i pass residuals to decision tree then i get nearly :
+        75k + (-23) = 52k very close prediction (it cause overfitting problem)
+        in this case it has low bias but high variance(learning training data too closely)
+    to prevent this we add alpha value (learning rate) to it which ranges from 0 to 1
+    so 75k + 0.1(-23) = 73.7 it has very huge difference with the actual value
+
+    so we add another decision tree sequential where previous tree outputs passed as inputs and
+    produces again residuals
+
+    so F(x) = h0(x)+alpha1h1(x)+alpha2h2(x)+.....+alphanhn(x)
+            = summation(alpha i h i(x)) this is the final output
+
+    after some iterations , residuals keep decreasing.
+
+complete math behind it (ml notes)
