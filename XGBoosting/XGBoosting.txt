@@ -1,0 +1,44 @@
+XGBoost = Extreme Gradient Boosting
+
+It is an optimised and regularized implementation of Gradient Boosting that builds decision trees
+sequentially where each new tree improves the previous model.
+
+XGBoost is an optimized gradient boosting algorithm that builds trees sequentially 
+using gradient and Hessian information, while applying regularization to control overfitting.
+
+step 1 : calculate the base output or simply average
+step 2 : contruct tree by finding the best split using similarity weight formula
+        compare the gain with all columns to find the best root and best splits too.
+step3 : now calculate the output using base model value for each indiviual prediction.
+        that is sigmoid(base value + learning rate (similarity weight)) for classification
+step 4 : find the final output using all prediction
+        that is sigmoid(base + lr(t1) + lr(t2) + ....) t1 is similarity weight of tree1
+
+(L2 regularization)we use lambda while calculating simularity weight in denominator to control the weight
+example : without regularization , w = -G/H =total gain / hessian = --10/2 = 5
+            therefore w = 5
+            this is fairly a large correction
+            so with regularization
+            w = -G/H+Y = 10/2+1 = 3.33
+
+            it makes weight smaller and steady and stop aggressive increase of weights
+            if we use higher lamba then we do stronger shrinking of leaf weights
+
+            so with aggressive weights , model goes overfitting 
+            with L2 (lambda) - slower weights , less aggressive , less overfitting
+
+we also use L1 regularization (adding penality based on absolute value of the leaf weight)
+   L1 tries to push weights towards zero where L2 keep shrinks the leaf weights
+
+   for example : w = -sign(G)max(|G|-alpha,0)/H+y
+   G = -10, H =5, alpha = 6, lambda = 0
+   w = - ((-1)max(10-6,0))/5+0
+   w = - ((-1)4)/5 = 4/5 = 0.8
+
+   without l1 the value will be 2 , with alpha 0.8
+   sometime it makes 0 , when gain is negative
+
+   so , XGboosting is the advanced version of Gradient boosting where we apply additionally
+        loss and regularization techniques to it.
+
+   full math behind it : notes
