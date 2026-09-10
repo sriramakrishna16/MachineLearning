@@ -1,0 +1,50 @@
+LightGBM Definition :
+LightGBM is a fast and memory-efficient gradient boosting framework that builds decision trees sequentially, where each new tree learns from the errors of the previous trees, 
+ using a histogram-based method and leaf-wise tree growth.
+
+Advantages :
+Fast training speed and higher efficiency.
+Low memory usage
+Better accuracy
+Support of parallel, distributed, and GPU learning
+Capable of handling large scale data
+
+LightGBM uses histogram bin splitting technique
+and it also EFB mean exclusive feature bundling
+
+in 1st technique , we use bins to store the data range like 
+    if sal is divided into two bins in tree that 20,30,50,60,70,80,90
+    then [20,30,50,60] one bin and [70,80,90] and then [20-60] and [70-90]
+    which makes it faster
+and 2nd technique is EFB for example Gender
+    M F
+    0 1
+    1 0
+    1 0
+    we observe that if one feature has 1 and then another feature has 0
+    we can use EFB to bundle it together
+    BF
+    11
+    10
+    11
+    so 11 stands for male and 10 stands for female
+and 3rd technique is GOSS(Gradient based one side sampling)
+    for example there are base model -> 500 records
+    then gradiets are g1,g2,g3.....g500
+    and LightGBM with do sorting in descending order
+    assuming may be it will look like..
+    g48,g14,g76,......g120
+    and then one part of sample taken from starting values likely 0.2(20%)
+    and we left with 80% data and from 80% randomly select certain values 0.1(10%)
+
+    therefore top 20%(highest gradients) + bottom with random 10% gradients
+    so by combining this two , we get a sub sample
+
+    mean if gradient is low , model is doing good no need to do tarining again and again on
+    these lowest gradient values
+    and in 20% model is not performing great
+    so 20% has high priority and 10% has low priority 
+
+    so we are randomly taking samples from right side thats why 
+    named one side sample(GOSS)
+
