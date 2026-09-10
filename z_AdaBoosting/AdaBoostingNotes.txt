@@ -1,0 +1,73 @@
+AdaBoosting Definition:
+AdaBoost (Adaptive Boosting) is an ensemble learning algorithm that combines multiple weak learners, 
+usually small decision trees, sequentially, giving more importance to the data points
+that previous learners classified incorrectly.
+
+simple a set of records are passed through base learner and predicts the value
+and verifies the output and the outputs which are incorrect are only passed to the next
+base learner which is connected sequentially
+f1 f2 f3 output sample weight
+-   -   -   -   1/7
+                1/7
+                1/7
+                .
+                .
+                1/7  total n records. and f1 f2 f3 are input features 
+step 1: in ada boosting we compute initailly sampling weight for every record
+    and build stumps , stumps mean a tree with depth only one
+    so we create n seperate stumps where n = no of features
+
+    so we have select first stump/decision tree from all stumps using entropy
+    less entropy are considered as first stump
+
+step 2 : so from the stump1 we get output as like 4 correctly classified and 1 incorrectly classified 
+    then for the incorrect classification we have to find the total error
+
+    that is summing up the sample weights of particular incorrect classified record
+    in this case only one record so TE = 1/7
+
+step 3 : calculate the performance of the stump 
+    performance = 1/2 log ((1-TE)/TE) = 0.896
+
+step 4 : update the weights 
+    new sample weight = weight * e ^ performance = 1/7 * e ^ 0.896 = 0.349
+    for correctly classified , new weight = weight * e ^ (-perf) = 0.05
+
+    we can observe that the correctly classified weights are decreased and 
+    incorrectly classifed weights are increased.
+
+    we get normalised values by dividing with total updated weight that is 0.68
+
+sample weight updated weight Normalised weight
+1/7     0.05        0.07
+1/7     0.349       0.513
+1/7     0.05        0.07
+1/7     0.05        ..
+1/7     0.05        ..
+1/7     0.05        ..
+1/7     0.05        ..
+        tot = 0.68
+
+now when we do summation of normalised weights , that weights equal to 1
+
+step 5 : now we craete new dataset based on normalised weights
+        normalised weights can be divided into buckets that is..
+        0.0 to 0.07   
+        0.07 to 0.58
+        0.58 to 0.65
+        0.65 to 0.72
+        ...
+        ...
+
+        now model algorithm run and selects the different records from older dataset
+        where that falls into buckets.
+        why buckets , because records with higher weights have higher prob to get sampled
+
+        there is no gurentee to get all previous data into second tree
+        but there is gurenteed to have wrong clasified data one or more times...
+
+        therefore based on wrong classification again stumps are created and repeats the process
+        untill the error becomes low. 
+
+        so we are combining the weak learners sequnetially until it become string learner.
+
