@@ -1,0 +1,97 @@
+CatBoost definition:
+ CatBoost is a gradient boosting algorithm based on decision trees that can handle categorical
+ features directly, using techniques such as ordered target statistics and ordered boosting to 
+ reduce target leakage and improve performance.
+
+Why catboost ..?
+    traditional ml models usually require ctaegorical data to be converted into numerical
+if a categorical feature contains thousands of unique values , this can craete a very large
+number of columns
+
+catboost provides its own way of handling categorical values to pass directly to the model
+
+Catboost follows the basic gradient boosting idea using decision trees where it handles the 
+categorical column specially in a faster way.
+
+in Catboost we can pass three types of features:
+            1.text features
+            2.categorical features
+            3.numerical features
+
+cat boost can perform well with limited data whithoud large encoded columns
+it can perform well and faster with low - medium sized dataset but large dataset
+needs more computational cost and training speed beacuse of extra layer of statistics
+it performs well when datahas more categorical columns
+
+categorical to numerical conversion:
+    one of the technique is Target based encoding
+
+in TBE , we convert the categorical values into numerical based on target
+one we use is one hot encoding , but this is not used in Catboost.
+for example:
+city encoded = sum of all/ count
+city    sales   city_endoded
+hyd     1       1+0+1/3 = 0.67
+bng     0       0.5
+hyd     0       0.67
+bng     1       0.5
+hyd     1       0.67
+
+and we use threshold to predict the output , like >0.5 - yes , <0.5 - no
+
+this approach has an issue
+we are litterally exposing the target and causes data leakage will result in overfitting
+
+to overcome , we use Ordered encoding technique
+
+Ordered Encoding Technique:
+    cat boost initially shuffles the data
+    and assigns each row encoded value individually
+    using formula -> sum of previous target values + prior / maxCount + 1
+    where 1 in denom is prior weight
+
+for example :
+city    sales/covid     encoded_City
+hyd     0
+bng     1
+hyd     0       -
+bng     1       0.7
+hyd     0       -
+bng     1       0.8
+
+now i am doing OE for last row 
+
+sum of previous target values = 1+1 = 2
+prior = avg of all target values = 0+1+0+1+0+1 = 3/6 = 0.5
+max count = there are two bng row above the current = 2
+
+therefore -> 2 + 0.5 / 2 + 1 = 2.5/3 ~= 0.8
+
+in the same way bng in 4th row = 1 + 0.5 / 1 +1 = 1.5 / 2 ~= 0.7
+
+observe that we have differnet values for bng city
+
+therefore every row has differnt value that overcomes the data leakage problem
+
+Another thing that cat boost will perform is MVS
+Minimum Viable Sampling:
+    it is a sampling method used while building trees. Instead of using every training sample
+    equally , it can select a subset of examples in a way that tries to keep the gradient
+    estimation accurate while reducing computation
+
+    basic idea training data -> calculate gradients -> MVC -> select usefull and important features
+    to build tree
+
+important parameters in cat boost
+pool , because cat boost requires additional information
+        like categorical features , text features , and numerical features
+
+        pool is a internal data structure that helps to cat boost model for faster data understanding
+
+Loss function
+
+CPU / GPU for faster computation
+
+Golden parameter -> more importance to particular feature
+
+Bootstrap -> MVC or Uniform or Random
