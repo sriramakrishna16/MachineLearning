@@ -1,0 +1,81 @@
+Support Vector Machine Definition:
+    A Support Vector Machine (SVM) is a supervised machine learning algorithm used for classification 
+    and regression tasks. Its main objective is to find the optimal decision boundary (called a hyperplane) 
+    that separates data points of different classes with the maximum possible margin.
+
+There are two different types of data :
+    1) Linearly separable data
+    2) Non-linearly separable data
+
+Main agenda of SVM in Linearly sepearable data :
+ Draw a straight line that sepeartes the two classes with maximum possible margin
+
+Step 1: Identify the closest data points from both classes.
+step 2: Draw multiple straight lines passing through two data points parallely
+step 3: Calculate the distance between the two parallel lines and choose the parallel lines
+        which has the maximum distance margin
+step 4: Draw the line exactly at centre between the selected parallel lines(Distance/2) and 
+        we can call it as classifier or hyperplane.
+
+Non-linearly seperable data:
+    we cannot draw a stright line as we drwan on LSD.
+    so we convert the 2D data into 3D data 
+    and now we follow all four steps 
+    again convert back from 3d to 2d data.
+
+SVM uses kernels to convert the low dimentional data to high dimensional data
+ there are two types of kernels : 1) polynomila 2)RBF(Radial Basic Function)
+ 
+wx + b = 0 as decision boundary 
+wx + b = -1 as one of the parellel hyperplane
+wx + b = 1 as another parallel hyperplane
+
+we use this calculation to define the classes
+
+for example taking points as [-4,0] and [4,4]
+    and assuming slope = -1, c or b = 0
+    for [-4,0] -> y = wT x + b
+                    = [-1 0]T [-4,0]
+                    = -4
+    for [4,4] -> y = 4
+    so, -4 classified as negative class 
+      and 4 classified as positive class
+    so one class is negative that is wTx + b = -1
+    and the other one is wTx + b = 1
+distance between the classes x1 and x2 where x1 and x2 are the nearest parallel 
+hyperplanes of both classes
+
+therefore x1 => wTx1 + b = -1
+          x2 => wTx2 + b = 1
+        therefore => wT(x2-x1) = 2
+
+        since x2 - x1 is distance and same direction as w 
+        we can write it as d/||d|| * ||d||
+        where d/|d| is unit direction and |d| is actual distance
+
+        since d is the direction of w 
+        d/|d| = w/|w|
+
+        therefore 
+
+        wT(w/|w| * |d|) = 2
+        wTw / ||w|| *||d|| = 2
+        wTw = ||w||2
+
+        therefore 
+        ||w|| ||d|| = 2
+        ||d|| = 2/||w||
+
+        actual margin = 2/||w||
+
+    therefore for optimisation
+    SVM wants the maximum margin
+    so max 2/||w||
+
+    since 2/||w|| same as minimizing ||w||
+    mean 2/10 = 0.1 , 2/2 = 1, 2/1 = 2 so lower the norm , higher the margin
+     so min ||w||
+
+    to make the math easier min 1/2 ||w||2
+    therefore objective is min (1/2 ||w||2 + c summation(zeeta))
+    where c is regularization as penality and zeeta is total loss 
