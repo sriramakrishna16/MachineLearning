@@ -1,0 +1,58 @@
+Clustering Definition:
+    Clustering is an unsupervised learning algorithm.
+it do the task of dividing the data points into variety of groups such that data points within
+same clusters are simillar to other datapoints in same cluster than those in other clusters.
+
+the aim is to form groups with simillar traits.
+
+There are commonly two types of clustering algorithms , namely:
+    1) K-means clustering.
+    2) Hierarchical clustering.
+
+K-Means Clustering:
+in this algorithm, we group the items into k clusters such that all items in the same cluster are
+    as simillar to each other as possible and items not in same clusters are as different as possible.
+
+Distance measures (like euclidean) are used to calculate similarity and dissimilarity between the datapoints.
+Each cluster has a centroid that we assume randomly, and while performing mean we got new centriods until 
+the mean doesnt change.
+
+step 1: choose the number k of clusters
+step 2: select the random k centriods with in n data points
+step 3: Assign each data point to the closest centriod based on euclidean distance or manhattan
+        that forms k clusters
+step 4: compute and place the new centroid of each clusters.
+step 5: reassign each datapoint to the new closest centriod. if mean keep changing repeat from step4 
+        until mean remian unchanged.
+
+the value of k is very crucial for optimal outcomes from the algorithm. There are several techniques to
+choose the optimal value for k including 
+    - cross validation
+    - silhouette method
+    - G means algorithm
+    - elbow method
+
+Elbow method:
+    objective function
+    j = summation(summation(distance(pi, ck)2))
+            |       |
+        all clusters|
+                 sum of all points distance to centriod
+    
+this is called wcss (within cluster sum of squares)
+
+step 1 : we apply k means clustering algorithm for different values of k like 1 to 10
+step 2 : for each k we calculate the wcss 
+step 3 : plot curve of wcss according to the number of clusters
+step 4 : location of bend in plot is generally considered as the approximate k value
+
+key observation :
+    when we calculate the wcss for all differnet values of k 
+    each k produces different wcss value , for k = 1 generally wcss is higher
+    and when k keeps increasing , wcss keeps decreasing 
+    but at some point we find increasing k doesnt have much effect as like before 
+    that means increasing cluster does doest produce much benefit 
+    that position should be visually considered as elbow point
+
+    first bend higher effect and higher change of wcss and second bend which produces
+    no strong effect which is considered as best k.
