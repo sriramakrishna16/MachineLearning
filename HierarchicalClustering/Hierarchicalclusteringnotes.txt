@@ -1,0 +1,41 @@
+Hierarchical clustering definition:
+    Hierarchical Clustering is an unsupervised learning algorithm that creates clusters by progressively 
+    merging similar data points , forming a hierarchy of clusters.
+
+There are two approaches in hierarchical clustering:
+    1) Agglomerative HC(bottom-up)
+    2) Divisive HC(top to bottom)
+
+Agglomerative approach:
+Here each observation is considered as the cluster of its own . Then the most simillar clusters are
+successively merged until there is just one single big cluster represented as tree or dendogram.
+
+steps:
+
+step 1 : Make each data point a cluster that forms n cluster
+step 2: take two closest data points and make them one cluster that forms n-1 cluster
+step 3: repeat the step 2 until it forms big cluster
+
+In hierarchical clustering , we use dendogram to identify and find the best 
+optimised k value as we do in k-means clustering using elbow method.
+
+The number of clusters that best represents the different groups can be chosen 
+by observing the dendrogram.
+
+the best choice of the no of clusters is the no of vertical lines in dendogram cut
+by a horizontal line that can traverse the maximum distance vertically without intersecting
+cluster or merging
+
+we use several approches in Agglomerative clustering to find the best k:
+they are single link , complete link , average link
+
+in single link , we calculate distance between nearest points using minimum distance value between
+    two points , it forms chaining effect and no clear seperation of clusters 
+    example AB paired and we are now linking with C 
+    distance of(AB, C) is  min((A,C), (B,C)) we choose min
+    if b is close to c then forms single cluster and chaining effects 
+    in dendogram we cannot observe clearly the gap difference.
+
+    but in Complete link , we choose max dis that covers the real distance and compact formation
+    of cluster so we can observe clearly the gap between the merged clusters
+    and we can decide the best k.
