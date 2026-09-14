@@ -1,0 +1,22 @@
+K Nearest Neighbors Def :
+    K nearest neighbors is a supervised machine learning algorithm that predicts the class or value
+    of a new data point based on the nearest k data points in the training dataset.
+
+main idea is simillar data points usually have simillar outcomes
+
+ex :
+Score   Income  Loan_eligible?
+600     5.5L        No
+720     12.5        Yes
+810     15          Yes
+550     5           No
+
+step 1 : choose the K value which is hyperparameter
+step 2 : Stores the datapoints , whereas many ml models learn parameters or patterns form
+        training data , but in KNN it actually stores the data and its label for further calculations
+        we can also visualize using graphs by taking x axis as score and y as income.
+step 3 : Test datas every row will be calculating distance with every row in training dataset.
+        euclidean distance = sqrt((x2-x1)2 + (y2-y1)2) 
+                            = sqrt(summation(pi - qi)2)
+step 4 : select the k nearest neighbors in sorted order to predict the data(nearest ones are first)
+step 5 : based on k neighbor labels , choose the maximum.
