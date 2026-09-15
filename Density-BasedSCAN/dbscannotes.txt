@@ -1,0 +1,36 @@
+Density-Based Spatial Clustering of Applications with Noise Definition:
+    DBSCAN is an unsupervised clustering algorithm that forms clusters based on the density 
+    of data points and identifies isolated points as noise/outliers.
+
+parameters:
+    epsilon is the radius of particular datapoint.
+    min points - minimum datapoints to present within epsilon value of particular data point
+
+if many points close together they form a cluster.
+
+if a point is isolated then it is indicated as noise.
+
+when we are forming clusters , we have to observe three points:
+    -core
+    -border
+    -noise/outlier
+
+core - should have min points , then it is considered as core datapoint
+border - should have core as neighbor
+noise - no minimum points and no core neighbors
+
+if we compare two data points in same cluster then it is called as intra cluster similarity
+and if we compare two data points from differnet cluster then it is called as inter cluster 
+similarity.
+
+Density Connected:
+Two points are density-connected if you can travel from one point to the other through a chain of 
+nearby core points, where every step stays within eps
+
+for example core 5 has point 11 
+and core 11 has point 5 
+
+so p5 <=> p11 so the two clusters are connected by forming chain... and forms a single cluster
+
+clusters are formed based on core and density connections
+
