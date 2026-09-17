@@ -4,4 +4,63 @@ Principal Component Analysis(PCA):
     contains most of the information.
 
 Based on the dataset find a new set of orthogonal feature vectors in such a way that the data 
-spread is maximum in the direction of feature vector(or dimension) 
+spread is maximum in the direction of feature vector(or dimension)
+
+Two features are orthogonal if they perpendicular to each other.
+because we are rotating geometrically x and y axis towards more variance direction then one component or (axis in geometric)
+has more variance so PC1 and PC2 are on same direction they have the same information
+
+so if we make pc2 perpendicular then pc2 contains no info that contains pc1 , pc2 carries some other 
+information with low variance.
+
+then most of the information on pc1 thus we can reduce the dimenstionality by creating new features
+
+Steps:
+
+step 1: standardize the datapoints
+        xnew = x-mean(x)/std(x)    -> where std(x) = sqrt((xi -u)2/N) 
+step 2 : compute the covariance matrix for the matrix of standardized datapoints.
+        cov(x,y) = 1/n-1 (summation((xi-xbar)(yi-ybar))) where xbar and ybar are mean of the data.
+
+step 3 : compute eigen values and eigen vectors
+        eigen values -> |C - yI| = 0 where c is covariance matrix and y is eigen value and i is identity matrix.
+        where we y , eigen values.
+
+        eigen value reprents the variance captured by that direction
+
+        if y = 3 and y = 1 so y = 3 has captured more variance
+
+        pc1 = 75% and pc2 = 25%
+
+
+        Eigen vector:
+        Cv = yv where v is the vectors intially we represent it as x and y
+        we substitute the eigen values to find the eigen vector values
+
+        Eigen vector represents the direction of principal component
+        for example v1 = [0.707, 0.707] then for two features Pc1 = 0.707x1 + 0.707x2
+
+        so eigen vector shows the direction and eigen values reprensents the variance in that direction
+
+step 4 : sort the eigen vectors by decreasing the eigen values and choose k eigen vectors
+        with large eigen values to form  d* k dimension matrix
+
+        simply we choose the highest eigen values which has highest variance
+         d is dimention of original matrix. k is eigen vectors where we reduce 
+
+step 5 : transfose the samples into the new subspace
+        multiply the standardized data with choosed eigen values corresponding vectors 
+        for example three eigen values 2 3 0.3 we choose y1 and y2 that is 2 and 3
+        we have the no of eigen values and eigen vectors for each values is equal to 
+        n in matrix size example if there is 3*3 matrix then we got 3 eigen values and 
+        3 eigen vectors for each eigen value
+
+        therefore we choose the two eigen values among 3
+        then 3*3 multiplies 2*2 eigen vectors then new feature values are 2*2
+        which contains the most of the information.
+        and reduced dimenstionality to 3D to 2D
+
+        for example if y1 = 1.899 and y2 = 0.0501 and y3 = 0.749
+        then y1 has 70 variance and y2 has less than 2 and y3 has 28%
+        so we choose y1 and y3
+        then we acheive 98% data variance with dimenstionality reduction and 2% loss.
