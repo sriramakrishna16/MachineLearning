@@ -1,0 +1,7 @@
+Principal Component Analysis(PCA):
+    PCA is a dimenstionality reduction method that is often used to reduce the dimenstionality 
+    of large datasets , by transforming a large set of variables into a smaller one that still
+    contains most of the information.
+
+Based on the dataset find a new set of orthogonal feature vectors in such a way that the data 
+spread is maximum in the direction of feature vector(or dimension) 
